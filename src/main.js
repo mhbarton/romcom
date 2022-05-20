@@ -1,16 +1,24 @@
 // Create variables targetting the relevant DOM elements here 👇
-var overall = document.querySelector('.main-cover')
+
+
+//randomizer variables.
 var coverImage = document.querySelector('.cover-image')
 var coverTitle = document.querySelector('.cover-title')
 var coverTagline1 = document.querySelector('.tagline-1')
 var coverTagline2 = document.querySelector('.tagline-2')
 
+// pages
+var mainCoverPage = document.querySelector('.main-cover')
+var formPage = document.querySelector('.form-view')
+var savedCoversPage = document.querySelector('.saved-view')
 
+// buttons
 var buttonHome = document.querySelector('.home-button')
-var buttonRandom = document.querySelector('.random-cover-button')
 var buttonSave = document.querySelector('.save-cover-button')
-var buttonView = document.querySelector('.view-saved-button')
-var buttonCreate = document.querySelector('.make-new-button')
+var buttonViewSaved = document.querySelector('.view-saved-button')
+var buttonMake = document.querySelector('.make-new-button')
+var buttonRandom = document.querySelector('.random-cover-button')
+
 
 // We've provided a few variables below
 var savedCovers = [
@@ -19,13 +27,60 @@ var savedCovers = [
 
 var currentCover = new Cover();
 
-
 // Add your event listeners here 👇
 window.addEventListener('load', randomizeCover);
 buttonRandom.addEventListener('click', randomizeCover);
-
+buttonMake.addEventListener('click', seeCreationForm);
+buttonViewSaved.addEventListener('click', seeSavedCovers);
+buttonHome.addEventListener('click', seeHome)
 
 // Create your event handlers and other functions here 👇
+// console.log(homePage);
+
+function seeHome (){
+  mainCoverPage.classList.remove('hidden');
+  formPage.classList.add('hidden');
+  savedCoversPage.classList.add('hidden');
+  buttonRandom.classList.remove('hidden');
+  buttonSave.classList.remove('hidden');
+  buttonHome.classList.add('hidden')
+}
+
+function seeCreationForm(){
+    formPage.classList.remove('hidden');
+    buttonHome.classList.remove('hidden');
+    savedCoversPage.classList.toggle('hidden');
+    mainCoverPage.classList.add('hidden');
+    buttonRandom.classList.add('hidden');
+    buttonSave.classList.add('hidden');
+}
+
+function seeSavedCovers(){
+  savedCoversPage.classList.remove('hidden');
+  buttonHome.classList.remove('hidden');
+  formPage.classList.add('hidden');
+  mainCoverPage.classList.add('hidden');
+  buttonRandom.classList.add('hidden');
+  buttonSave.classList.add('hidden');
+}
+
+//
+// function toggleForms() {
+//   mainCoverPage.classList.add('hidden');
+//   buttonRandom.classList.add('hidden');
+//   buttonSave.classList.add('hidden');
+//   buttonHome.classList.remove('hidden');
+// }
+
+
+
+//
+//   function switchViews(){
+//     if (buttCreate)
+//   buttonCreate.setAttribute("hidden");
+//   buttonCreate.removeAttribute("hidden")
+//   // buttonCreate.setAttribute( "");
+// }
 
   function randomizeCover() {
   currentCover = new Cover(covers[getRandomIndex(covers)], titles[getRandomIndex(titles)], descriptors[getRandomIndex(descriptors)], descriptors[getRandomIndex(descriptors)]);
