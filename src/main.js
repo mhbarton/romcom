@@ -12,12 +12,19 @@ var mainCoverPage = document.querySelector('.main-cover')
 var formPage = document.querySelector('.form-view')
 var savedCoversPage = document.querySelector('.saved-view')
 
+//inputs for makeMyBook
+var coverInput = document.querySelector('.user-cover')
+var titleInput = document.querySelector('.user-title')
+var descriptor1Input = document.querySelector('.user-desc1')
+var descriptor2Input = document.querySelector('.user-desc2')
+
 // buttons
 var buttonHome = document.querySelector('.home-button')
 var buttonSave = document.querySelector('.save-cover-button')
 var buttonViewSaved = document.querySelector('.view-saved-button')
 var buttonMake = document.querySelector('.make-new-button')
 var buttonRandom = document.querySelector('.random-cover-button')
+var buttonMakeMyBook = document.querySelector('.create-new-book-button')
 
 
 // We've provided a few variables below
@@ -32,10 +39,16 @@ window.addEventListener('load', randomizeCover);
 buttonRandom.addEventListener('click', randomizeCover);
 buttonMake.addEventListener('click', seeCreationForm);
 buttonViewSaved.addEventListener('click', seeSavedCovers);
-buttonHome.addEventListener('click', seeHome)
+buttonHome.addEventListener('click', seeHome);
+buttonMakeMyBook.addEventListener('click', makeMyBook)
 
 // Create your event handlers and other functions here 👇
 // console.log(homePage);
+function makeMyBook(){
+  covers.push(coverInput.value);
+  titles.push(titleInput.value);
+  descriptors.push(descriptor1Input.value, descriptor2Input.value);
+}
 
 function seeHome (){
   mainCoverPage.classList.remove('hidden');
