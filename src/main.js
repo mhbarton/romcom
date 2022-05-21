@@ -13,6 +13,7 @@ var homeView = document.querySelector('.home-view')
 var mainCoverPage = document.querySelector('.main-cover')
 var formPage = document.querySelector('.form-view')
 var savedCoversPage = document.querySelector('.saved-view')
+var savedCoversSection = document.querySelector('.saved-covers-section')
 
 //inputs for makeMyBook
 var coverInput = document.querySelector('.user-cover')
@@ -43,7 +44,8 @@ buttonRandom.addEventListener('click', randomizeCover);
 buttonMake.addEventListener('click', seeCreationForm);
 buttonViewSaved.addEventListener('click', seeSavedCovers);
 buttonHome.addEventListener('click', seeHome);
-buttonMakeMyBook.addEventListener('click', makeMyBook)
+buttonMakeMyBook.addEventListener('click', makeMyBook);
+buttonSave.addEventListener('click', saveCustomCover);
 
 // Create your event handlers and other functions here 👇
 // console.log(homePage);
@@ -56,6 +58,18 @@ buttonMakeMyBook.addEventListener('click', makeMyBook)
 //   descriptors.unshift(descriptor1Input.value, descriptor2Input.value);
 // }
 //   // currentCover = new Cover(covers[0], titles[0], descriptors[0], descriptors[0]);
+// currentCover = new Cover(covers[getRandomIndex(covers)], titles[getRandomIndex(titles)], descriptors[getRandomIndex(descriptors)], descriptors[getRandomIndex(descriptors)]);
+// return coverTitle.innerHTML = currentCover.title, coverTagline1.innerHTML = currentCover.tagline1, coverTagline2.innerHTML = currentCover.tagline2, coverImage.src = currentCover.cover
+
+
+function saveCustomCover() {
+for(var i =0; i < savedCovers.length; i++) {
+  if (savedCovers.includes(currentCover)) {
+    return savedCovers.splice(i, 1)
+} return savedCovers.push(currentCover)
+}
+};
+
 
 function makeMyBook(event){
 event.preventDefault ();
@@ -97,7 +111,16 @@ function seeSavedCovers(){
   homeView.classList.add('hidden');
   buttonRandom.classList.add('hidden');
   buttonSave.classList.add('hidden');
-}
+  for (var i = 0; i < savedCovers.length; i++) {
+    savedCoversSection.innerHTML +=
+    `<section class = "mini-cover">
+    <img class="cover-image" src="${savedCovers[i].cover}">
+    <h2 class="cover-title"> ${savedCovers[i].title} </h2>
+    <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
+    </section>`
+  }
+};
+
 
   function randomizeCover() {
   currentCover = new Cover(covers[getRandomIndex(covers)], titles[getRandomIndex(titles)], descriptors[getRandomIndex(descriptors)], descriptors[getRandomIndex(descriptors)]);
@@ -108,4 +131,4 @@ function seeSavedCovers(){
 // We've provided one function to get you started
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
-}
+};
