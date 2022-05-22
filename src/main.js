@@ -63,13 +63,12 @@ buttonSave.addEventListener('click', saveCustomCover);
 
 
 function saveCustomCover() {
-for(var i =0; i < savedCovers.length; i++) {
-  if (savedCovers.includes(currentCover)) {
-    return savedCovers.splice(i, 1)
-} return savedCovers.push(currentCover)
-}
+  if (!savedCovers.includes(currentCover)) {
+    savedCovers.push(currentCover);
+} else {
+    savedCovers.splice(savedCovers.indexOf(currentCover))
+  }
 };
-
 
 function makeMyBook(event){
 event.preventDefault ();
@@ -82,10 +81,10 @@ event.preventDefault ();
   homeView.classList.remove('hidden')
   formPage.classList.add('hidden')
   buttonSave.classList.remove('hidden')
-return coverTitle.innerHTML = currentCover.title, coverTagline1.innerHTML = currentCover.tagline1, coverTagline2.innerHTML = currentCover.tagline2, coverImage.src = currentCover.cover
+coverTitle.innerHTML = currentCover.title, coverTagline1.innerHTML = currentCover.tagline1, coverTagline2.innerHTML = currentCover.tagline2, coverImage.src = currentCover.cover
+seeHome ()
 }
 // console.log(makeMyBook());
-
 function seeHome (){
   homeView.classList.remove('hidden');
   formPage.classList.add('hidden');
@@ -94,7 +93,6 @@ function seeHome (){
   buttonSave.classList.remove('hidden');
   buttonHome.classList.add('hidden')
 }
-
 function seeCreationForm(){
     formPage.classList.remove('hidden');
     buttonHome.classList.remove('hidden');
@@ -102,6 +100,13 @@ function seeCreationForm(){
     homeView.classList.add('hidden');
     buttonRandom.classList.add('hidden');
     buttonSave.classList.add('hidden');
+    document.querySelector('form').reset();
+}
+
+function saveCustomCover() {
+  if (!savedCovers.includes(currentCover)) {
+    savedCovers.push(currentCover);
+  }
 }
 
 function seeSavedCovers(){
@@ -111,22 +116,29 @@ function seeSavedCovers(){
   homeView.classList.add('hidden');
   buttonRandom.classList.add('hidden');
   buttonSave.classList.add('hidden');
+  savedCoversSection.innerHTML = '';
   for (var i = 0; i < savedCovers.length; i++) {
-    savedCoversSection.innerHTML +=
-    `<section class = "mini-cover">
-    <img class="cover-image" src="${savedCovers[i].cover}">
-    <h2 class="cover-title"> ${savedCovers[i].title} </h2>
-    <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
-    </section>`
+    if (!savedCovers.includes(savedCovers)) {
+      savedCoversSection.innerHTML +=
+      `<section class = "mini-cover">
+      <img class="cover-image" src="${savedCovers[i].cover}">
+      <h2 class="cover-title"> ${savedCovers[i].title} </h2>
+      <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
+      </section>`
+    } else {
+      savedCovers.splice(savedCovers.indexOf(savedCovers))
+    }
   }
-};
+}
+  // } else {
+  //     savedCoversSection.splice(savedCoversSection.indexOf(savedCovers))
+  // }
 
 
-  function randomizeCover() {
+function randomizeCover() {
   currentCover = new Cover(covers[getRandomIndex(covers)], titles[getRandomIndex(titles)], descriptors[getRandomIndex(descriptors)], descriptors[getRandomIndex(descriptors)]);
   return coverTitle.innerHTML = currentCover.title, coverTagline1.innerHTML = currentCover.tagline1, coverTagline2.innerHTML = currentCover.tagline2, coverImage.src = currentCover.cover
 };
-
 
 // We've provided one function to get you started
 function getRandomIndex(array) {
